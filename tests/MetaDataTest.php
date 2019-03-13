@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace IgniTest\Annotation;
+namespace FatCodeTest\Annotation;
 
-use Igni\Annotation\MetaData\MetaData;
-use Igni\Annotation\Target;
-use IgniTest\Annotation\Fixtures\Annotations\MetaClass;
-use IgniTest\Annotation\Fixtures\Annotations\MetaProperty;
-use IgniTest\Annotation\Fixtures\Annotations\SimpleAnnotation;
+use FatCode\Annotation\MetaData\MetaData;
+use FatCode\Annotation\Target;
+use FatCodeTest\Annotation\Fixtures\Annotations\MetaClass;
+use FatCodeTest\Annotation\Fixtures\Annotations\MetaProperty;
+use FatCodeTest\Annotation\Fixtures\Annotations\SimpleAnnotation;
 use PHPUnit\Framework\TestCase;
 
 final class MetaDataTest extends TestCase

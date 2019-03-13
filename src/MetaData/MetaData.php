@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation\MetaData;
+namespace FatCode\Annotation\MetaData;
 
-use Igni\Annotation\Annotation;
-use Igni\Annotation\Enum;
-use Igni\Annotation\Exception\MetaDataException;
-use Igni\Annotation\NoValidate;
-use Igni\Annotation\Required;
-use Igni\Annotation\Target;
-use Igni\Annotation\Context;
-use Igni\Annotation\Parser;
+use FatCode\Annotation\Annotation;
+use FatCode\Annotation\Enum;
+use FatCode\Annotation\Exception\MetaDataException;
+use FatCode\Annotation\NoValidate;
+use FatCode\Annotation\Required;
+use FatCode\Annotation\Target;
+use FatCode\Annotation\Context;
+use FatCode\Annotation\Parser;
 use ReflectionClass;
 use ReflectionProperty;
 

@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation;
+namespace FatCode\Annotation;
 
-use Igni\Annotation\Exception\ParserException;
-use Igni\Annotation\MetaData\MetaData;
+use FatCode\Annotation\Exception\ParserException;
+use FatCode\Annotation\MetaData\MetaData;
 
 class Parser
 {
     private const PHP_ANNOTATIONS = [
-        // PHP Documentator
+        // PHP Documentor
         'api',
         'author',
         'category',

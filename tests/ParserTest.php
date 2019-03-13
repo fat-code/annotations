@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace IgniTest\Annotation;
+namespace FatCodeTest\Annotation;
 
-use Igni\Annotation\Annotation;
-use Igni\Annotation\Context;
-use Igni\Annotation\NoValidate;
-use Igni\Annotation\Parser;
-use Igni\Annotation\Target;
-use IgniTest\Annotation\Fixtures\Annotations\AnnotatedClass;
-use IgniTest\Annotation\Fixtures\Annotations\MetaClass;
-use IgniTest\Annotation\Fixtures\Annotations\MetaProperty;
-use IgniTest\Annotation\Fixtures\Annotations\SimpleAnnotation;
+use FatCode\Annotation\Annotation;
+use FatCode\Annotation\Context;
+use FatCode\Annotation\NoValidate;
+use FatCode\Annotation\Parser;
+use FatCode\Annotation\Target;
+use FatCodeTest\Annotation\Fixtures\Annotations\AnnotatedClass;
+use FatCodeTest\Annotation\Fixtures\Annotations\MetaClass;
+use FatCodeTest\Annotation\Fixtures\Annotations\MetaProperty;
+use FatCodeTest\Annotation\Fixtures\Annotations\SimpleAnnotation;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace IgniTest\Annotation;
+namespace FatCodeTest\Annotation;
 
-use Igni\Annotation\ReflectorImports;
-use IgniTest\Annotation\Fixtures\Annotations\MetaClass;
-use IgniTest\Annotation\Fixtures\Annotations\SimpleAnnotation;
+use FatCode\Annotation\ReflectorImports;
+use FatCodeTest\Annotation\Fixtures\Annotations\MetaClass;
+use FatCodeTest\Annotation\Fixtures\Annotations\SimpleAnnotation;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionProperty;
@@ -17,10 +17,10 @@ final class ReflectorImportsTest extends TestCase
        $imports = new ReflectorImports(new ReflectionClass(MetaClass::class));
        self::assertSame(
            [
-               'Annotation' => 'Igni\Annotation\Annotation',
-               'NoValidate' => 'Igni\Annotation\NoValidate',
-               'Required' => 'Igni\Annotation\Required',
-               'Target' => 'Igni\Annotation\Target',
+               'Annotation' => 'FatCode\Annotation\Annotation',
+               'NoValidate' => 'FatCode\Annotation\NoValidate',
+               'Required' => 'FatCode\Annotation\Required',
+               'Target' => 'FatCode\Annotation\Target',
            ],
            $imports->getImports()
        );
@@ -31,10 +31,10 @@ final class ReflectorImportsTest extends TestCase
         $imports = new ReflectorImports(new ReflectionProperty(MetaClass::class, 'properties'));
         self::assertSame(
             [
-                'Annotation' => 'Igni\Annotation\Annotation',
-                'NoValidate' => 'Igni\Annotation\NoValidate',
-                'Required' => 'Igni\Annotation\Required',
-                'Target' => 'Igni\Annotation\Target',
+                'Annotation' => 'FatCode\Annotation\Annotation',
+                'NoValidate' => 'FatCode\Annotation\NoValidate',
+                'Required' => 'FatCode\Annotation\Required',
+                'Target' => 'FatCode\Annotation\Target',
             ],
             $imports->getImports()
         );
@@ -45,10 +45,10 @@ final class ReflectorImportsTest extends TestCase
         $imports = new ReflectorImports(new ReflectionMethod(SimpleAnnotation::class, 'getAttribute'));
         self::assertSame(
             [
-                'Annotation' => 'Igni\Annotation\Annotation',
-                'Enum' => 'Igni\Annotation\Enum',
-                'NoValidate' => 'Igni\Annotation\NoValidate',
-                'Target' => 'Igni\Annotation\Target',
+                'Annotation' => 'FatCode\Annotation\Annotation',
+                'Enum' => 'FatCode\Annotation\Enum',
+                'NoValidate' => 'FatCode\Annotation\NoValidate',
+                'Target' => 'FatCode\Annotation\Target',
             ],
             $imports->getImports()
         );

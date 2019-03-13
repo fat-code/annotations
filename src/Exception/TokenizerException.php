@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation\Exception;
+namespace FatCode\Annotation\Exception;
 
-use Igni\Exception\LogicException;
+use FatCode\Exception\LogicException;
 
 final class TokenizerException extends LogicException implements AnnotationException
 {

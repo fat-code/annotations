@@ -1,5 +1,5 @@
 {
-  "name": "igniphp/annotations",
+  "name": "fatcode/annotations",
   "description": "",
   "keywords": [
     "annotations",
@@ -25,12 +25,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Igni\\Annotation\\": "src/"
+      "FatCode\\Annotation\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "IgniTest\\Annotation\\": "tests/"
+      "FatCodeTest\\Annotation\\": "tests/"
     }
   }
 }

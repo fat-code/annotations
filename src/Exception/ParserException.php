@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation\Exception;
+namespace FatCode\Annotation\Exception;
 
-use Igni\Annotation\Context;
-use Igni\Annotation\Token;
-use Igni\Exception\LogicException;
+use FatCode\Annotation\Context;
+use FatCode\Annotation\Token;
+use FatCode\Exception\LogicException;
 use Throwable;
 
 final class ParserException extends LogicException implements AnnotationException

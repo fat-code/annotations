@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation;
+namespace FatCode\Annotation;
 
 /**
  * Indicates that class should be treat as annotation.

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation;
+namespace FatCode\Annotation;
 
-use Igni\Annotation\Exception\TokenizerException;
+use FatCode\Annotation\Exception\TokenizerException;
 use Iterator;
 
 use function count;

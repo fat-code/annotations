@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation\MetaData;
+namespace FatCode\Annotation\MetaData;
 
 final class Attribute
 {

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace IgniTest\Annotation\Fixtures\Annotations;
+namespace FatCodeTest\Annotation\Fixtures\Annotations;
 
-use Igni\Annotation\Annotation;
-use Igni\Annotation\Enum;
-use Igni\Annotation\NoValidate;
-use Igni\Annotation\Required;
-use Igni\Annotation\Target;
+use FatCode\Annotation\Annotation;
+use FatCode\Annotation\Enum;
+use FatCode\Annotation\NoValidate;
+use FatCode\Annotation\Required;
+use FatCode\Annotation\Target;
 
 /**
  * @Annotation()

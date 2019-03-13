@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation;
+namespace FatCode\Annotation;
 
 /**
  * Specifies valid targets for the annotation.

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace IgniTest\Annotation\Fixtures\Annotations;
+namespace FatCodeTest\Annotation\Fixtures\Annotations;
 
 /**
  * @MetaClass(properties=[

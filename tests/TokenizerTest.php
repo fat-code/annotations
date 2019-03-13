@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace IgniTest\Annotation;
+namespace FatCodeTest\Annotation;
 
-use Igni\Annotation\Token;
-use Igni\Annotation\Tokenizer;
+use FatCode\Annotation\Token;
+use FatCode\Annotation\Tokenizer;
 use PHPUnit\Framework\TestCase;
 
 use function count;

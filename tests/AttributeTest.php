@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace IgniTest\Annotation;
+namespace FatCodeTest\Annotation;
 
-use Igni\Annotation\MetaData\Attribute;
-use Igni\Annotation\Token;
+use FatCode\Annotation\MetaData\Attribute;
+use FatCode\Annotation\Token;
 use PHPUnit\Framework\TestCase;
 
 final class AttributeTest extends TestCase

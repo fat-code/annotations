@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Igni\Annotation\Exception;
+namespace FatCode\Annotation\Exception;
 
-use Igni\Annotation\Context;
-use Igni\Annotation\MetaData\MetaData;
-use Igni\Exception\LogicException;
+use FatCode\Annotation\Context;
+use FatCode\Annotation\MetaData\MetaData;
+use FatCode\Exception\LogicException;
 
 final class MetaDataException extends LogicException implements AnnotationException
 {
