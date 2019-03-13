@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace FatCodeTest\Annotation\Fixtures\Annotations;
+namespace FatCode\Tests\Annotation\Fixtures\Annotations;
 
 use FatCode\Annotation\Annotation;
 use FatCode\Annotation\Enum;

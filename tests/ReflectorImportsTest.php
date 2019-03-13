@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace FatCodeTest\Annotation;
+namespace FatCode\Tests\Annotation;
 
 use FatCode\Annotation\ReflectorImports;
-use FatCodeTest\Annotation\Fixtures\Annotations\MetaClass;
-use FatCodeTest\Annotation\Fixtures\Annotations\SimpleAnnotation;
+use FatCode\Tests\Annotation\Fixtures\Annotations\MetaClass;
+use FatCode\Tests\Annotation\Fixtures\Annotations\SimpleAnnotation;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionProperty;

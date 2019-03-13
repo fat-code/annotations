@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace FatCodeTest\Annotation;
+namespace FatCode\Tests\Annotation;
 
 use FatCode\Annotation\MetaData\Attribute;
 use FatCode\Annotation\Token;

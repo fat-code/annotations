@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace FatCodeTest\Annotation;
+namespace FatCode\Tests\Annotation;
 
 use FatCode\Annotation\Annotation;
 use FatCode\Annotation\Context;
 use FatCode\Annotation\NoValidate;
 use FatCode\Annotation\Parser;
 use FatCode\Annotation\Target;
-use FatCodeTest\Annotation\Fixtures\Annotations\AnnotatedClass;
-use FatCodeTest\Annotation\Fixtures\Annotations\MetaClass;
-use FatCodeTest\Annotation\Fixtures\Annotations\MetaProperty;
-use FatCodeTest\Annotation\Fixtures\Annotations\SimpleAnnotation;
+use FatCode\Tests\Annotation\Fixtures\Annotations\AnnotatedClass;
+use FatCode\Tests\Annotation\Fixtures\Annotations\MetaClass;
+use FatCode\Tests\Annotation\Fixtures\Annotations\MetaProperty;
+use FatCode\Tests\Annotation\Fixtures\Annotations\SimpleAnnotation;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
