@@ -1,7 +1,6 @@
 {
   "name": "fatcode/annotations",
-  "description": "",
-  "version": "1.0.0",
+  "description": "Annotations library",
   "keywords": [
     "annotations",
     "docblock",
@@ -16,9 +15,7 @@
   ],
   "require": {
     "php": ">=7.1.0",
-    "ext-mbstring" : "*",
-    "igniphp/validation": ">=2.1",
-    "igniphp/exception": ">=1.0.0"
+    "ext-mbstring" : "*"
   },
   "require-dev": {
     "phpunit/phpunit": ">=8.0",
