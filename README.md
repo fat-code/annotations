@@ -1,7 +1,7 @@
-# Igni Annotations [![Build Status](https://travis-ci.org/fat-code/annotations.svg?branch=master)](https://travis-ci.org/fat-code/annotations)
+# FatCode Annotations [![Build Status](https://travis-ci.org/fat-code/annotations.svg?branch=master)](https://travis-ci.org/fat-code/annotations)
 
 ## Introduction
-Igni annotations is an attempt to provide meta data programing for php by extending docblock comments.
+Annotations is an attempt to provide meta data programing for php by extending docblock comments.
 Syntax is compatible with latest [annotations rfc](https://wiki.php.net/rfc/annotations_v2).
 
 ### Differences from RFC
