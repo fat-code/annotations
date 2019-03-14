@@ -1,4 +1,4 @@
-# Igni Annotations
+# Igni Annotations [![Build Status](https://travis-ci.org/fat-code/annotations.svg?branch=master)](https://travis-ci.org/fat-code/annotations)
 
 ## Introduction
 Igni annotations is an attempt to provide meta data programing for php by extending docblock comments.
