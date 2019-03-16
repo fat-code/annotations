@@ -2,7 +2,7 @@
 
 namespace FatCode\Annotation\Exception;
 
-use FatCode\Exception\LogicException;
+use LogicException;
 
 final class TokenizerException extends LogicException implements AnnotationException
 {

@@ -103,7 +103,7 @@ final class Context
         $instance = new self(
             Target::TARGET_CLASS,
             $class->getNamespaceName(),
-            $class->getName()
+            $class->name
         );
         $imports = new ReflectorImports($class);
         $instance->imports = $imports->getImports();
@@ -116,7 +116,7 @@ final class Context
         $instance = new self(
             Target::TARGET_METHOD,
             $method->getDeclaringClass()->getNamespaceName(),
-            "{$method->getDeclaringClass()->getName()}::{$method->getName()}()"
+            "{$method->getDeclaringClass()->name}::{$method->name}()"
         );
         $imports = new ReflectorImports($method);
         $instance->imports = $imports->getImports();
@@ -129,7 +129,7 @@ final class Context
         $instance = new self(
             Target::TARGET_PROPERTY,
             $property->getDeclaringClass()->getNamespaceName(),
-            "{$property->getDeclaringClass()->getName()}::\${$property->getName()}"
+            "{$property->getDeclaringClass()->name}::\${$property->name}"
         );
         $imports = new ReflectorImports($property);
         $instance->imports = $imports->getImports();
@@ -142,7 +142,7 @@ final class Context
         $instance = new self(
             Target::TARGET_FUNCTION,
             $function->getNamespaceName(),
-            "{$function->getName()}()"
+            "{$function->name}()"
         );
         $imports = new ReflectorImports($function);
         $instance->imports = $imports->getImports();
