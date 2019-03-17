@@ -118,27 +118,26 @@ class Parser
         if (in_array($identifier, self::PHP_ANNOTATIONS, true)) {
             return null;
         }
-
         $arguments = $this->parseArguments($tokenizer, $context);
-
         // Other ignored annotations have to be parsed before we ignore them.
         if (in_array($identifier, $this->ignored, true)) {
             return null;
         }
-
         $annotationClass = $context->resolveClassName($identifier);
-
         if ($annotationClass === null) {
             if ($this->ignoreNotImported) {
                 return null;
             }
             throw ParserException::forUnknownAnnotationClass($identifier, $context);
         }
-
         $metaData = $this->getMetaData($annotationClass, $context);
+        $target = $nested ? Target::TARGET_ANNOTATION : $context->getTarget();
+        if (!$metaData->validateTarget($target)) {
+            throw ParserException::forInvalidTarget($context, $target, $annotationClass);
+        }
         if (!$metaData->hasConstructor()) {
-            if ($metaData->validateAttributes($arguments)) {
-
+            if (!$metaData->validateAttributes($arguments)) {
+                throw ParserException::forInvalidAttributeValue($context, $annotationClass, $metaData->getFailedAttribute());
             }
             $annotation = new $annotationClass();
             $valueArgs = [];
@@ -157,7 +156,6 @@ class Parser
         } else {
             $annotation = new $annotationClass($arguments, $metaData);
         }
-
         return $annotation;
     }
 

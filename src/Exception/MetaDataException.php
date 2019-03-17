@@ -4,9 +4,9 @@ namespace FatCode\Annotation\Exception;
 
 use FatCode\Annotation\Context;
 use FatCode\Annotation\MetaData\MetaData;
-use FatCode\Exception\LogicException;
+use RuntimeException;
 
-final class MetaDataException extends LogicException implements AnnotationException
+final class MetaDataException extends RuntimeException implements AnnotationException
 {
     public static function forInvalidTarget($target, Context $context) : self
     {

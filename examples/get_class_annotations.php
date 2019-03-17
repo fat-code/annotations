@@ -1,12 +1,33 @@
 <?php declare(strict_types=1);
+
 require_once '../vendor/autoload.php';
 
-use FatCode\Annotation\Context;
-use FatCode\Annotation\Parser;
-use IgniTest\Annotation\Fixtures\Annotations\AnnotatedClass;
+use FatCode\Annotation\Required;
+use FatCode\Annotation\Annotation;
+use FatCode\Annotation\Target;
+use FatCode\Annotation\AnnotationReader;
 
-$reflection = new ReflectionClass(AnnotatedClass::class);
-$parser = new Parser();
-$annotations = $parser->parse($reflection->getDocComment(), Context::fromReflectionClass($reflection));
+/**
+ * @Annotation
+ * @Target(Target::TARGET_CLASS)
+ */
+class MyAnnotation
+{
+    /**
+     * @Required
+     * @var string
+     */
+    public $name;
+}
 
-print_r($annotations);
+/**
+ * @MyAnnotation(name="Hello World")
+ */
+class AnnotatedClass
+{
+}
+
+$reader = new AnnotationReader();
+$annotations = $reader->readClassAnnotations(AnnotatedClass::class);
+
+var_dump($annotations);
