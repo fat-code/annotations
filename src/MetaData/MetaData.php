@@ -169,7 +169,7 @@ final class MetaData
         $this->collectClassMeta($class);
     }
 
-    private function collectClassMeta(ReflectionClass $class)
+    private function collectClassMeta(ReflectionClass $class) : void
     {
         $this->isAnnotation = false;
         $annotations = $this->parser->parse($class->getDocComment(), $this->context);
