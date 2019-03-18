@@ -3,6 +3,7 @@
 namespace FatCode\Annotation\Exception;
 
 use FatCode\Annotation\Context;
+use FatCode\Annotation\MetaData\Attribute;
 use FatCode\Annotation\Token;
 use LogicException;
 

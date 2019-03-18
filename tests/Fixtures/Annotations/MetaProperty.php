@@ -21,6 +21,7 @@ class MetaProperty
     public $name;
 
     /**
+     * @Required()
      * @Enum("int", 'string', "float", "boolean")
      * @var string
      */

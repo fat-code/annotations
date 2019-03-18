@@ -148,7 +148,7 @@ final class Tokenizer implements Iterator
 
     public function last() : Token
     {
-        return $this->tokens[$this->cursor - 1];
+        return $this->tokens[$this->length - 1];
     }
 
     public function current() : Token

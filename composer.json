@@ -29,6 +29,7 @@
   "autoload-dev": {
     "psr-4": {
       "FatCode\\Tests\\Annotation\\": "tests/"
-    }
+    },
+    "files": ["tests/Fixtures/functions.php"]
   }
 }

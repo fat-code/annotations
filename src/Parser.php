@@ -135,11 +135,19 @@ class Parser
         if (!$metaData->validateTarget($target)) {
             throw ParserException::forInvalidTarget($context, $target, $annotationClass);
         }
+
+        return $this->instantiateAnnotation($metaData, $arguments, $context);
+
+    }
+
+    private function instantiateAnnotation(MetaData $metaData, array $arguments, Context $context) : object
+    {
+        $class = $metaData->getClass();
         if (!$metaData->hasConstructor()) {
             if (!$metaData->validateAttributes($arguments)) {
-                throw ParserException::forInvalidAttributeValue($context, $annotationClass, $metaData->getFailedAttribute());
+                throw ParserException::forInvalidAttributeValue($context, $class, $metaData->getFailedAttribute());
             }
-            $annotation = new $annotationClass();
+            $annotation = new $class();
             $valueArgs = [];
             foreach ($arguments as $key => $value) {
                 if (is_numeric($key)) {
@@ -154,7 +162,7 @@ class Parser
                 $annotation->value = $valueArgs;
             }
         } else {
-            $annotation = new $annotationClass($arguments, $metaData);
+            $annotation = new $class($arguments, $metaData);
         }
         return $annotation;
     }

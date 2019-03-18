@@ -122,6 +122,36 @@ final class TokenizerTest extends TestCase
         self::assertSame($expected, $token->getValue());
     }
 
+    public function testSeekAny() : void
+    {
+        $tokenizer = new Tokenizer('@Namespace(12, true, false, 34.12)');
+        $found = $tokenizer->seekAny(Token::T_COMMA);
+        self::assertTrue($found);
+        self::assertSame(13, $tokenizer->current()->getPosition());
+        self::assertSame(',', (string) $tokenizer->current());
+
+        $found =  $tokenizer->seekAny(Token::T_FALSE);
+        self::assertTrue($found);
+        self::assertSame(21, $tokenizer->current()->getPosition());
+        self::assertSame('false', (string) $tokenizer->current());
+    }
+
+    public function testFirst() : void
+    {
+        $tokenizer = new Tokenizer('@Namespace(12, true, false, 34.12)');
+        $token = $tokenizer->first();
+        self::assertSame('@', (string) $token);
+        self::assertSame(0, $token->getPosition());
+    }
+
+    public function testLast() : void
+    {
+        $tokenizer = new Tokenizer('@Namespace(12, true, false, 34.12)');
+        $token = $tokenizer->last();
+        self::assertSame(')', (string) $token);
+        self::assertSame(33, $token->getPosition());
+    }
+
     public function provideBooleans() : array
     {
         return [
