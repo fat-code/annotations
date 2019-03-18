@@ -11,4 +11,11 @@ namespace FatCode\Tests\Annotation\Fixtures\Annotations;
 class AnnotatedClass
 {
 
+    /**
+     * @MetaFunction(name="The test method")
+     */
+    public function annotatedMethod() : void
+    {
+
+    }
 }

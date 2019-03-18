@@ -35,7 +35,7 @@ final class MetaDataTest extends TestCase
         self::assertSame('string', $name->getType());
 
         $type = $meta->getAttribute('type');
-        self::assertFalse($type->isRequired());
+        self::assertTrue($type->isRequired());
         self::assertTrue($type->isEnum());
         self::assertSame('string', $type->getType());
 
