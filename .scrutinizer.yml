@@ -21,3 +21,4 @@ filter:
     - docs/*
     - tests/*
     - src/Exception/*
+    - examples/*
