@@ -147,6 +147,12 @@ class Parser
         if (!$metaData->validateAttributes($arguments)) {
             throw ParserException::forInvalidAttributeValue($context, $class, $metaData->getFailedAttribute());
         }
+
+        return $this->instantiateAnnotationWithoutConstructor($class, $arguments);
+    }
+
+    private function instantiateAnnotationWithoutConstructor(string $class, array $arguments) : object
+    {
         $annotation = new $class();
         $valueArgs = [];
         foreach ($arguments as $key => $value) {

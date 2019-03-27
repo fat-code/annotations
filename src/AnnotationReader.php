@@ -23,10 +23,7 @@ class AnnotationReader
 
     public function readClassAnnotations(string $className) : array
     {
-        if (!class_exists($className)) {
-            throw AnnotationReaderException::forUndefinedClass($className);
-        }
-        $reflectionClass = new ReflectionClass($className);
+        $reflectionClass = $this->getReflectionClass($className);
         $docBlock = $reflectionClass->getDocComment();
         if (!is_string($docBlock)) {
             return [];
@@ -37,10 +34,7 @@ class AnnotationReader
 
     public function readMethodAnnotations(string $className, string $methodName) : array
     {
-        if (!class_exists($className)) {
-            throw AnnotationReaderException::forUndefinedClass($className);
-        }
-        $reflectionClass = new ReflectionClass($className);
+        $reflectionClass = $this->getReflectionClass($className);
         if (!$reflectionClass->hasMethod($methodName)) {
             throw AnnotationReaderException::forUndefinedMethod($reflectionClass->name, $methodName);
         }
@@ -58,10 +52,7 @@ class AnnotationReader
 
     public function readPropertyAnnotations(string $className, string $propertyName) : array
     {
-        if (!class_exists($className)) {
-            throw AnnotationReaderException::forUndefinedClass($className);
-        }
-        $reflectionClass = new ReflectionClass($className);
+        $reflectionClass = $this->getReflectionClass($className);
         if (!$reflectionClass->hasProperty($propertyName)) {
             throw AnnotationReaderException::forUndefinedProperty($reflectionClass->name, $propertyName);
         }
@@ -92,5 +83,13 @@ class AnnotationReader
             $docBlock,
             Context::fromReflectionFunction($reflectionFunction)
         );
+    }
+
+    private function getReflectionClass(string $className) : ReflectionClass
+    {
+        if (!class_exists($className)) {
+            throw AnnotationReaderException::forUndefinedClass($className);
+        }
+        return new ReflectionClass($className);
     }
 }

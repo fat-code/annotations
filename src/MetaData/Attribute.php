@@ -85,15 +85,7 @@ final class Attribute
         }
 
         if ($this->isEnum()) {
-            if (is_array($this->type)) {
-                foreach ($value as $item) {
-                    if (!in_array($item, $this->enum)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return in_array($value, $this->enum);
+            return $this->validateEnum($value);
         }
 
         if (!$this->validateType($this->type, $value)) {
@@ -101,6 +93,19 @@ final class Attribute
         }
 
         return true;
+    }
+
+    private function validateEnum($value) : bool
+    {
+        if (is_array($this->type)) {
+            foreach ($value as $item) {
+                if (!in_array($item, $this->enum, true)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return in_array($value, $this->enum, true);
     }
 
     private function validateType($type, $value) : bool
