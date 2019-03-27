@@ -1,4 +1,4 @@
-# FatCode Annotations [![Build Status](https://travis-ci.org/fatcode/annotations.svg?branch=master)](https://travis-ci.org/fat-code/annotations) [![Maintainability](https://api.codeclimate.com/v1/badges/6a28f90961197d43702e/maintainability)](https://codeclimate.com/github/fatcode/annotations/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/6a28f90961197d43702e/test_coverage)](https://codeclimate.com/github/fatcode/annotations/test_coverage)
+# FatCode Annotations [![Build Status](https://travis-ci.org/fatcode/annotations.svg?branch=master)](https://travis-ci.org/fatcode/annotations) [![Maintainability](https://api.codeclimate.com/v1/badges/6a28f90961197d43702e/maintainability)](https://codeclimate.com/github/fatcode/annotations/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/6a28f90961197d43702e/test_coverage)](https://codeclimate.com/github/fatcode/annotations/test_coverage)
 
 ## Introduction
 Annotations is an attempt to provide meta data programing for php by extending docblock comments.
