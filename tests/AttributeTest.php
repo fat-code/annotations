@@ -23,7 +23,7 @@ final class AttributeTest extends TestCase
     public function testValidateEnum() : void
     {
         $attribute = new Attribute('testValidateEnum', 'int');
-        $attribute->enumerate([1, 2, 3]);
+        $attribute->setEnumeration([1, 2, 3]);
         self::assertTrue($attribute->validate(1));
         self::assertTrue($attribute->validate(3));
         self::assertFalse($attribute->validate('aa'));

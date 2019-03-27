@@ -19,7 +19,9 @@
   },
   "require-dev": {
     "phpunit/phpunit": ">=8.0",
-    "mockery/mockery": ">=1.2"
+    "mockery/mockery": ">=1.2",
+    "vimeo/psalm": ">=3.2",
+    "squizlabs/php_codesniffer": ">=3.0"
   },
   "autoload": {
     "psr-4": {
@@ -31,5 +33,11 @@
       "FatCode\\Tests\\Annotation\\": "tests/"
     },
     "files": ["tests/Fixtures/functions.php"]
+  },
+  "scripts": {
+    "phpunit": "vendor/bin/phpunit --coverage-text",
+    "phpcs": "vendor/bin/phpcs --standard=PSR2 --warning-severity=0 src",
+    "phpcsf": "vendor/bin/phpcbf --standard=PSR2 --warning-severity=0 src",
+    "psalm": "vendor/bin/psalm --show-info=false"
   }
 }

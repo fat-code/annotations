@@ -9,6 +9,9 @@ use ReflectionProperty;
 
 final class Context
 {
+    /**
+     * @var string[]
+     */
     private const BUILT_IN_ANNOTATIONS = [
         'Annotation' => Annotation::class,
         'Enum' => Enum::class,
@@ -27,8 +30,14 @@ final class Context
      */
     private $imports = [];
 
+    /**
+     * @var string
+     */
     private $target;
 
+    /**
+     * @var string
+     */
     private $namespace;
 
     public function __construct(
@@ -81,9 +90,10 @@ final class Context
         }
 
         $identifier = explode('\\', $identifier);
+        $leadingIdentifier = $identifier[0];
         $imports = $this->getImports();
-        if (isset($imports[$identifier[0]])) {
-            $identifier = array_merge(explode('\\', $imports[$identifier[0]]), array_slice($identifier, 1));
+        if (isset($imports[$leadingIdentifier])) {
+            $identifier = array_merge(explode('\\', $imports[$leadingIdentifier]), array_slice($identifier, 1));
         }
         $identifier = implode('\\', $identifier);
         if (class_exists($identifier)) {

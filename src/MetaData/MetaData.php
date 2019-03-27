@@ -152,12 +152,14 @@ final class MetaData
         return null !== $this->lastFailedAttribute;
     }
 
+    /**
+     * @return Attribute
+     */
     public function getFailedAttribute() : Attribute
     {
         if (!$this->hasFailedAttribute()) {
-            throw MetaDataException::forUnresolvableFailedAttribute($this);
+            throw MetaDataException::forNoFailedAttributes();
         }
-
         return $this->lastFailedAttribute;
     }
 
@@ -172,7 +174,12 @@ final class MetaData
     private function collectClassMeta(ReflectionClass $class) : void
     {
         $this->isAnnotation = false;
-        $annotations = $this->parser->parse($class->getDocComment(), $this->context);
+        $docBlock = $class->getDocComment();
+        if (false === $docBlock) {
+            return;
+        }
+
+        $annotations = $this->parser->parse($docBlock, $this->context);
         foreach ($annotations as $annotation) {
             switch (get_class($annotation)) {
                 case Annotation::class:
@@ -211,6 +218,11 @@ final class MetaData
         $propertyContext = Context::fromReflectionProperty($property);
         $docComment = $property->getDocComment();
         $name = $property->getName();
+        if (false === $docComment) {
+            $this->attributes[$name] = new Attribute($name);
+            return;
+        }
+
         $type = $this->parseDeclaredType($docComment, $this->context);
         $required = false;
         $validate = true;
@@ -237,7 +249,7 @@ final class MetaData
             $attribute->disableValidation();
         }
         if ($enum) {
-            $attribute->enumerate($enum);
+            $attribute->setEnumeration($enum);
         }
 
         $this->attributes[$name] = $attribute;

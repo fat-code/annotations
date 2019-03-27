@@ -24,8 +24,19 @@ class Token
     public const T_COLON = 19;
     public const T_EOL = 20;
 
+    /**
+     * @var int
+     */
     private $type;
+
+    /**
+     * @var string
+     */
     private $value;
+
+    /**
+     * @var int
+     */
     private $position;
 
     public function __construct(int $position, int $type, string $value)

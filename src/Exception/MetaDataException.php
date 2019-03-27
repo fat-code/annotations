@@ -8,7 +8,7 @@ use RuntimeException;
 
 final class MetaDataException extends RuntimeException implements AnnotationException
 {
-    public static function forInvalidTarget($target, Context $context) : self
+    public static function forInvalidTarget(string $target, Context $context) : self
     {
         return new self("Invalid target {$target} passed in {$context}");
     }
@@ -16,5 +16,10 @@ final class MetaDataException extends RuntimeException implements AnnotationExce
     public static function forUndefinedAttribute(MetaData $metaData, string $attribute) : self
     {
         return new self("Annotation class {$metaData->getClass()} defines no attribute {$attribute}.");
+    }
+
+    public static function forNoFailedAttributes() : self
+    {
+        return new self("Could not retrieve last failed attribute, did you forget to run validateAttributes?");
     }
 }

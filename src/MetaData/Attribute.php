@@ -4,13 +4,32 @@ namespace FatCode\Annotation\MetaData;
 
 final class Attribute
 {
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * @var bool
+     */
     private $required;
+
+    /**
+     * @var string
+     */
     private $type;
+
+    /**
+     * @var string[]
+     */
     private $enum;
+
+    /**
+     * @var bool
+     */
     private $validate = true;
 
-    public function __construct(string $name, $type = 'mixed', bool $required = true)
+    public function __construct(string $name, $type = 'mixed', bool $required = false)
     {
         $this->name = $name;
         $this->type = $type;
@@ -46,7 +65,7 @@ final class Attribute
         return $this->enum !== null;
     }
 
-    public function enumerate(array $values) : void
+    public function setEnumeration(array $values) : void
     {
         $this->enum = $values;
     }
