@@ -1,6 +1,14 @@
 language: php
 
+env:
+  global:
+    - DRIVER_VERSION=1.5.3
+    - CC_TEST_REPORTER_ID=5c240d2180806598bbd0ba1d7ba70062b0501a43b21cd37fd2f4bc44f1a5fca0
+
 sudo: true
+
+services:
+  - mongodb
 
 php:
   - 7.2
@@ -8,16 +16,17 @@ php:
 
 before_install:
   - composer self-update
-
-install:
-  - composer update
+  - composer install --no-interaction --no-progress --no-suggest
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-clover=clover.xml
+  - vendor/bin/phpcs --standard=PSR12 --warning-severity=0 src
 
 after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 cache:
   directories:

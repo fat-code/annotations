@@ -11,6 +11,9 @@ use ReflectionFunction;
  */
 class AnnotationReader
 {
+    /**
+     * @var Parser
+     */
     private $parser;
 
     public function __construct(Parser $parser = null)
@@ -20,44 +23,47 @@ class AnnotationReader
 
     public function readClassAnnotations(string $className) : array
     {
-        if (!class_exists($className)) {
-            throw AnnotationReaderException::forUndefinedClass($className);
+        $reflectionClass = $this->getReflectionClass($className);
+        $docBlock = $reflectionClass->getDocComment();
+        if (!is_string($docBlock)) {
+            return [];
         }
-        $reflectionClass = new ReflectionClass($className);
 
-        return $this->parser->parse($reflectionClass->getDocComment(), Context::fromReflectionClass($reflectionClass));
+        return $this->parser->parse($docBlock, Context::fromReflectionClass($reflectionClass));
     }
 
     public function readMethodAnnotations(string $className, string $methodName) : array
     {
-        if (!class_exists($className)) {
-            throw AnnotationReaderException::forUndefinedClass($className);
-        }
-        $reflectionClass = new ReflectionClass($className);
+        $reflectionClass = $this->getReflectionClass($className);
         if (!$reflectionClass->hasMethod($methodName)) {
             throw AnnotationReaderException::forUndefinedMethod($reflectionClass->name, $methodName);
         }
         $reflectionMethod = $reflectionClass->getMethod($methodName);
+        $docBlock = $reflectionMethod->getDocComment();
+        if (!is_string($docBlock)) {
+            return [];
+        }
 
         return $this->parser->parse(
-            $reflectionMethod->getDocComment(),
+            $docBlock,
             Context::fromReflectionMethod($reflectionMethod)
         );
     }
 
     public function readPropertyAnnotations(string $className, string $propertyName) : array
     {
-        if (!class_exists($className)) {
-            throw AnnotationReaderException::forUndefinedClass($className);
-        }
-        $reflectionClass = new ReflectionClass($className);
+        $reflectionClass = $this->getReflectionClass($className);
         if (!$reflectionClass->hasProperty($propertyName)) {
             throw AnnotationReaderException::forUndefinedProperty($reflectionClass->name, $propertyName);
         }
         $reflectionProperty = $reflectionClass->getProperty($propertyName);
+        $docBlock = $reflectionProperty->getDocComment();
+        if (!is_string($docBlock)) {
+            return [];
+        }
 
         return $this->parser->parse(
-            $reflectionProperty->getDocComment(),
+            $docBlock,
             Context::fromReflectionProperty($reflectionProperty)
         );
     }
@@ -68,10 +74,22 @@ class AnnotationReader
             throw AnnotationReaderException::forUndefinedFunction($functionName);
         }
         $reflectionFunction = new ReflectionFunction($functionName);
-
+        $docBlock = $reflectionFunction->getDocComment();
+        if (!is_string($docBlock)) {
+            return [];
+        }
+        
         return $this->parser->parse(
-            $reflectionFunction->getDocComment(),
+            $docBlock,
             Context::fromReflectionFunction($reflectionFunction)
         );
+    }
+
+    private function getReflectionClass(string $className) : ReflectionClass
+    {
+        if (!class_exists($className)) {
+            throw AnnotationReaderException::forUndefinedClass($className);
+        }
+        return new ReflectionClass($className);
     }
 }

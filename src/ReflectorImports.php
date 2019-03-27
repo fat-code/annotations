@@ -10,9 +10,24 @@ use ReflectionMethod;
 
 class ReflectorImports
 {
+    /**
+     * @var string[]
+     */
     private static $fileImports = [];
+
+    /**
+     * @var string
+     */
     private $filename;
+
+    /**
+     * @var int
+     */
     private $startLine;
+
+    /**
+     * @var string
+     */
     private $namespace;
 
     /**
@@ -31,6 +46,9 @@ class ReflectorImports
         $this->namespace = $reflector->getNamespaceName();
     }
 
+    /**
+     * @return string[]
+     */
     public function getImports() : array
     {
         if (isset(self::$fileImports[$this->filename])) {
@@ -44,6 +62,9 @@ class ReflectorImports
         return self::$fileImports[$this->filename] = $this->parseImports();
     }
 
+    /**
+     * @return string[]
+     */
     private function parseImports() : array
     {
         $fileHandler = fopen($this->filename, 'r');
@@ -52,7 +73,11 @@ class ReflectorImports
         }
         $contents = '';
         for ($i = 0; $i < $this->startLine; $i++) {
-            $contents .= fgets($fileHandler, 4096);
+            $line = fgets($fileHandler, 4096);
+            if (false === $line) {
+                break;
+            }
+            $contents .= $line;
         }
         fclose($fileHandler);
         $identifier = '[a-z_\x7f-\xff][a-z0-9_\x7f-\xff\\\]*';
@@ -73,5 +98,4 @@ class ReflectorImports
 
         return $imports;
     }
-
 }

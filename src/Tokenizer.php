@@ -9,6 +9,9 @@ use function count;
 
 final class Tokenizer implements Iterator
 {
+    /**
+     * @var string[]
+     */
     private const PATTERNS = [
         // String, single quoted or double quoted with escape support
         '("(?:\\\"|[^"])+"|\'(?:\\\\\'|[^\'])+\')',
@@ -27,6 +30,9 @@ final class Tokenizer implements Iterator
 
     private const FLAGS = PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_OFFSET_CAPTURE;
 
+    /**
+     * @var int[]
+     */
     private const TYPE_MAP = [
         PHP_EOL => Token::T_EOL,
         '@'  => Token::T_AT,
@@ -43,10 +49,29 @@ final class Tokenizer implements Iterator
         'null'  => Token::T_NULL,
     ];
 
+    /**
+     * @var string
+     */
     private $input;
+
+    /**
+     * @var string
+     */
     private $regex;
+
+    /**
+     * @var Token[]
+     */
     private $tokens = [];
+
+    /**
+     * @var int
+     */
     private $cursor = 0;
+
+    /**
+     * @var int
+     */
     private $length = 0;
 
     public function __construct(string $input)
@@ -70,7 +95,13 @@ final class Tokenizer implements Iterator
 
     protected function tokenize() : void
     {
-        $matches = $matches = preg_split($this->regex, $this->input, -1, self::FLAGS);
+        $matches = preg_split($this->regex, $this->input, -1, self::FLAGS);
+        if (false === $matches) {
+            $this->tokens = [];
+            return;
+        }
+
+        /** @var array $match */
         foreach ($matches as $match) {
             $token = $this->createToken($match[0], $match[1]);
             $this->tokens[] = $token;
@@ -79,12 +110,11 @@ final class Tokenizer implements Iterator
         $this->length = count($this->tokens);
     }
 
-
-    private function createToken($value, int $position) : Token
+    private function createToken(string $value, int $position) : Token
     {
         // Handle strings
         if ($value[0] === '"' || $value[0] === '\'') {
-            return new Token($position, Token::T_STRING, stripslashes(substr($value, 1, -1)));
+            return new Token($position, Token::T_STRING, stripslashes(trim($value, $value[0])));
         }
 
         // Take type from the map

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<psalm
+    useDocblockTypes="false"
+    useDocblockPropertyTypes="true"
+    strictBinaryOperands="true"
+    ignoreInternalFunctionFalseReturn="false"
+    ignoreInternalFunctionNullReturn="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+            <directory name="examples" />
+        </ignoreFiles>
+    </projectFiles>
+    <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <file name="src/Required.php" />
+                <file name="src/Target.php" />
+                <file name="src/Enum.php" />
+                <file name="src/Annotation.php" />
+                <file name="src/NoValidate.php" />
+            </errorLevel>
+        </MissingConstructor>
+        <PossiblyUndefinedMethod>
+            <errorLevel type="suppress">
+                <file name="src/ReflectorImports.php" />
+            </errorLevel>
+        </PossiblyUndefinedMethod>
+    </issueHandlers>
+</psalm>

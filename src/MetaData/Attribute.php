@@ -4,13 +4,32 @@ namespace FatCode\Annotation\MetaData;
 
 final class Attribute
 {
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * @var bool
+     */
     private $required;
+
+    /**
+     * @var string
+     */
     private $type;
+
+    /**
+     * @var string[]
+     */
     private $enum;
+
+    /**
+     * @var bool
+     */
     private $validate = true;
 
-    public function __construct(string $name, $type = 'mixed', bool $required = true)
+    public function __construct(string $name, $type = 'mixed', bool $required = false)
     {
         $this->name = $name;
         $this->type = $type;
@@ -46,7 +65,7 @@ final class Attribute
         return $this->enum !== null;
     }
 
-    public function enumerate(array $values) : void
+    public function setEnumeration(array $values) : void
     {
         $this->enum = $values;
     }
@@ -66,15 +85,7 @@ final class Attribute
         }
 
         if ($this->isEnum()) {
-            if (is_array($this->type)) {
-                foreach ($value as $item) {
-                    if (!in_array($item, $this->enum)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return in_array($value, $this->enum);
+            return $this->validateEnum($value);
         }
 
         if (!$this->validateType($this->type, $value)) {
@@ -82,6 +93,19 @@ final class Attribute
         }
 
         return true;
+    }
+
+    private function validateEnum($value) : bool
+    {
+        if (is_array($this->type)) {
+            foreach ($value as $item) {
+                if (!in_array($item, $this->enum, true)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return in_array($value, $this->enum, true);
     }
 
     private function validateType($type, $value) : bool

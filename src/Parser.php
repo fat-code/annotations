@@ -74,7 +74,6 @@ class Parser
      * @param string $docBlock
      * @param Context $context
      * @return array
-     * @throws
      */
     public function parse(string $docBlock, Context $context = null): array
     {
@@ -92,7 +91,6 @@ class Parser
         $annotations = [];
 
         while ($tokenizer->valid() && $tokenizer->seek(Token::T_AT)) {
-
             // Annotation must be preceded by a new line token, otherwise it should be ignored
             if ($tokenizer->key() > 1 && $tokenizer->at($tokenizer->key() - 1)->getType() !== Token::T_EOL) {
                 $tokenizer->next();
@@ -137,32 +135,37 @@ class Parser
         }
 
         return $this->instantiateAnnotation($metaData, $arguments, $context);
-
     }
 
     private function instantiateAnnotation(MetaData $metaData, array $arguments, Context $context) : object
     {
         $class = $metaData->getClass();
-        if (!$metaData->hasConstructor()) {
-            if (!$metaData->validateAttributes($arguments)) {
-                throw ParserException::forInvalidAttributeValue($context, $class, $metaData->getFailedAttribute());
+        if ($metaData->hasConstructor()) {
+            return new $class($arguments, $metaData);
+        }
+
+        if (!$metaData->validateAttributes($arguments)) {
+            throw ParserException::forInvalidAttributeValue($context, $class, $metaData->getFailedAttribute());
+        }
+
+        return $this->instantiateAnnotationWithoutConstructor($class, $arguments);
+    }
+
+    private function instantiateAnnotationWithoutConstructor(string $class, array $arguments) : object
+    {
+        $annotation = new $class();
+        $valueArgs = [];
+        foreach ($arguments as $key => $value) {
+            if (is_numeric($key)) {
+                $valueArgs[] = $value;
+                continue;
             }
-            $annotation = new $class();
-            $valueArgs = [];
-            foreach ($arguments as $key => $value) {
-                if (is_numeric($key)) {
-                    $valueArgs[] = $value;
-                    continue;
-                }
-                if (property_exists($annotation, $key)) {
-                    $annotation->{$key} = $value;
-                }
+            if (property_exists($annotation, $key)) {
+                $annotation->{$key} = $value;
             }
-            if (property_exists($annotation, 'value')) {
-                $annotation->value = $valueArgs;
-            }
-        } else {
-            $annotation = new $class($arguments, $metaData);
+        }
+        if (property_exists($annotation, 'value')) {
+            $annotation->value = $valueArgs;
         }
         return $annotation;
     }
@@ -329,7 +332,7 @@ class Parser
 
     private function skip(int $length, Tokenizer $tokenizer) : void
     {
-        for (;$length > 0; $length--) {
+        for (; $length > 0; $length--) {
             $tokenizer->next();
             if (!$tokenizer->valid()) {
                 return;
